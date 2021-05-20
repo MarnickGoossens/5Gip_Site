@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program</title>
+    <link rel="stylesheet" href="program_style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <header>
+            <img src="images/mosa-rt.jpg" alt="picture of the car">
+        </header>
+
+        <nav>
+            <a href="#" class="no-underline">Home</a>
+            <a href="#" class="no-underline">Discription</a>
+            <a href="#" class="no-underline">Program</a>
+            <a href="#" class="no-underline">Calculations</a>
+            <a href="#" class="no-underline">About</a>
+        </nav>
+
+        <main>
+            <pre>
+                <font color="#434f54">&#47;&#47; Variabele voor de motoren aan te sturen</font>
+                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">stby</font> <font color="#434f54">=</font> <font color="#000000">9</font><font color="#000000">;</font>
+                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">ain1</font> <font color="#434f54">=</font> <font color="#000000">2</font><font color="#000000">;</font>
+                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">ain2</font> <font color="#434f54">=</font> <font color="#000000">4</font><font color="#000000">;</font>
+                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">bin1</font> <font color="#434f54">=</font> <font color="#000000">7</font><font color="#000000">;</font>
+                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">bin2</font> <font color="#434f54">=</font> <font color="#000000">8</font><font color="#000000">;</font>
+                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">pwma</font> <font color="#434f54">=</font> <font color="#000000">5</font><font color="#000000">;</font>
+                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">pwmb</font> <font color="#434f54">=</font> <font color="#000000">6</font><font color="#000000">;</font>
+                <font color="#434f54">&#47;&#47; Variabele voor de 90° te draaien</font>
+                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">draai90</font> <font color="#434f54">=</font> <font color="#000000">115</font><font color="#000000">;</font> 
+                <font color="#00979c">int</font> <font color="#000000">tijdvoorachter</font> <font color="#434f54">=</font> <font color="#000000">1000</font><font color="#000000">;</font>
+                
+                <font color="#434f54">&#47;&#47; Variabele voor knop</font>
+                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">knop</font> <font color="#434f54">=</font> <font color="#000000">13</font><font color="#000000">;</font>
+                <font color="#00979c">int</font> <font color="#000000">knopstatus</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+                
+                <font color="#434f54">&#47;&#47; Variabele voor de ultrasone</font>
+                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">trigPin</font> <font color="#434f54">=</font> <font color="#000000">10</font><font color="#000000">;</font>
+                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">echoPin</font> <font color="#434f54">=</font> <font color="#000000">11</font><font color="#000000">;</font>
+                
+                <font color="#00979c">long</font> <font color="#000000">tijdUltrasone</font><font color="#000000">;</font>
+                <font color="#00979c">int</font> <font color="#000000">afstandUltrasone</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+                
+                <font color="#434f54">&#47;&#47; Variabele joystick</font>
+                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">vry</font> <font color="#434f54">=</font> <font color="#000000">A0</font><font color="#000000">;</font>
+                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">vrx</font> <font color="#434f54">=</font> <font color="#000000">A1</font><font color="#000000">;</font>
+                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">sw</font> <font color="#434f54">=</font> <font color="#000000">12</font><font color="#000000">;</font>
+                
+                <font color="#00979c">int</font> <font color="#000000">x</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+                <font color="#00979c">int</font> <font color="#000000">mapx</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+                <font color="#00979c">int</font> <font color="#000000">y</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+                <font color="#00979c">int</font> <font color="#000000">mapy</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+                <font color="#00979c">int</font> <font color="#000000">sw_status</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+                
+                
+                <font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+                
+                 &nbsp;<font color="#434f54">&#47;&#47; motoren</font>
+                 &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">stby</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font> <font color="#000000">knop</font><font color="#434f54">,</font> <font color="#00979c">INPUT</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;<font color="#434f54">&#47;&#47; ultrasone</font>
+                 &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">trigPin</font><font color="#434f54">,</font> <font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">echoPin</font><font color="#434f54">,</font> <font color="#00979c">INPUT</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;<font color="#434f54">&#47;&#47; Joystick</font>
+                 &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">vrx</font><font color="#434f54">,</font> <font color="#00979c">INPUT</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">vry</font><font color="#434f54">,</font> <font color="#00979c">INPUT</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">sw</font><font color="#434f54">,</font> <font color="#00979c">INPUT_PULLUP</font><font color="#000000">)</font><font color="#000000">;</font>
+                <font color="#000000">}</font>
+                
+                <font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+                
+                 &nbsp;<font color="#434f54">&#47;&#47; Knopstatus lezen</font>
+                 &nbsp;<font color="#000000">knopstatus</font> <font color="#434f54">=</font> <font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">knop</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">knopstatus</font> <font color="#434f54">==</font> <font color="#00979c">HIGH</font><font color="#000000">)</font> <font color="#000000">{</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">500</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; Ultrasone check</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">trigPin</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">delayMicroseconds</font><font color="#000000">(</font><font color="#000000">2</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">trigPin</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">delayMicroseconds</font><font color="#000000">(</font><font color="#000000">10</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">trigPin</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#000000">tijdUltrasone</font> <font color="#434f54">=</font> <font color="#d35400">pulseIn</font><font color="#000000">(</font><font color="#000000">echoPin</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#000000">afstandUltrasone</font> <font color="#434f54">=</font> <font color="#000000">tijdUltrasone</font> <font color="#434f54">*</font> <font color="#000000">0.034</font> <font color="#434f54">&#47;</font> <font color="#000000">2</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; 3s vooruit</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">afstandUltrasone</font> <font color="#434f54">&gt;</font> <font color="#000000">7</font><font color="#000000">)</font> <font color="#000000">{</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">255</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwmb</font><font color="#434f54">,</font> <font color="#000000">255</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">tijdvoorachter</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwmb</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#5e6d03">else</font> <font color="#000000">{</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; 180° draaien</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">draai90</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">tijdvoorachter</font> <font color="#434f54">*</font> <font color="#000000">2</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; Doorgaan</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">255</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwmb</font><font color="#434f54">,</font> <font color="#000000">255</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">tijdvoorachter</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwmb</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">1000</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; Ultrasone check</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">trigPin</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">delayMicroseconds</font><font color="#000000">(</font><font color="#000000">2</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">trigPin</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">delayMicroseconds</font><font color="#000000">(</font><font color="#000000">10</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">trigPin</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#000000">tijdUltrasone</font> <font color="#434f54">=</font> <font color="#d35400">pulseIn</font><font color="#000000">(</font><font color="#000000">echoPin</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#000000">afstandUltrasone</font> <font color="#434f54">=</font> <font color="#000000">tijdUltrasone</font> <font color="#434f54">*</font> <font color="#000000">0.034</font> <font color="#434f54">&#47;</font> <font color="#000000">2</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; 90° links</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">afstandUltrasone</font> <font color="#434f54">&gt;</font> <font color="#000000">7</font><font color="#000000">)</font> <font color="#000000">{</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">draai90</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">1000</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#5e6d03">else</font> <font color="#000000">{</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; 180° draaien</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">draai90</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">tijdvoorachter</font> <font color="#434f54">*</font> <font color="#000000">2</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; Doorgaan</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">draai90</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">1000</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">1000</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; Ultrasone check</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">trigPin</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">delayMicroseconds</font><font color="#000000">(</font><font color="#000000">2</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">trigPin</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">delayMicroseconds</font><font color="#000000">(</font><font color="#000000">10</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">trigPin</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#000000">tijdUltrasone</font> <font color="#434f54">=</font> <font color="#d35400">pulseIn</font><font color="#000000">(</font><font color="#000000">echoPin</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#000000">afstandUltrasone</font> <font color="#434f54">=</font> <font color="#000000">tijdUltrasone</font> <font color="#434f54">*</font> <font color="#000000">0.034</font> <font color="#434f54">&#47;</font> <font color="#000000">2</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; 3s achteruit</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain2</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin2</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">afstandUltrasone</font> <font color="#434f54">&gt;</font> <font color="#000000">7</font><font color="#000000">)</font> <font color="#000000">{</font> 
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">255</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwmb</font><font color="#434f54">,</font> <font color="#000000">255</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">tijdvoorachter</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain2</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin2</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#5e6d03">else</font> <font color="#000000">{</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; 180° draaien</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">draai90</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">tijdvoorachter</font> <font color="#434f54">*</font> <font color="#000000">2</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; Doorgaan</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">255</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwmb</font><font color="#434f54">,</font> <font color="#000000">255</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">tijdvoorachter</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain2</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin2</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">1000</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; 90° rechts</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwmb</font><font color="#434f54">,</font> <font color="#000000">draai90</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">1000</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
+                
+                 &nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">1000</font><font color="#000000">)</font><font color="#000000">;</font>
+                 &nbsp;<font color="#000000">}</font>
+                <font color="#000000">}</font>
+                 &nbsp;
+                
+                </pre>
+        </main>
+
+        <footer>
+            <p class="foot">Marnick Goossens - 5IICT - Vakoverschrijdend project</p>
+        </footer>
+        
+    </div>
+</body>
+</html>
