@@ -40,20 +40,20 @@ nav {
 }
 
 main {
+    text-align: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 30px;
     background-color: rgba(0, 0, 0, 0.678);
     font-family: Arial, Helvetica, sans-serif;
-    height: 325px;
-    padding-top: 80px;
+    height: 405px;
     padding-left: 240px;
     padding-right: 240px;
 }
 
-a {
-    padding-top: auto;
-    padding-bottom: auto;
-    padding-right: auto;
-    padding-left: auto;
+main a {
     color: white;
     font-size: 24px;
 }
