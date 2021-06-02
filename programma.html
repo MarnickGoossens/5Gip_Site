@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Programma</title>
     <link rel="stylesheet" href="program_style.css">
+    <link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.0/build/styles/default.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.0/build/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
 
 <body>
@@ -23,141 +27,114 @@
         </nav>
 
         <main>
-            <pre>
-                <font color="#434f54">&#47;&#47; Variabele voor de motoren aan te sturen</font>
-                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">stby</font> <font color="#434f54">=</font> <font color="#000000">9</font><font color="#000000">;</font>
-                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">ain1</font> <font color="#434f54">=</font> <font color="#000000">2</font><font color="#000000">;</font>
-                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">ain2</font> <font color="#434f54">=</font> <font color="#000000">4</font><font color="#000000">;</font>
-                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">bin1</font> <font color="#434f54">=</font> <font color="#000000">7</font><font color="#000000">;</font>
-                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">bin2</font> <font color="#434f54">=</font> <font color="#000000">8</font><font color="#000000">;</font>
-                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">pwma</font> <font color="#434f54">=</font> <font color="#000000">5</font><font color="#000000">;</font>
-                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">pwmb</font> <font color="#434f54">=</font> <font color="#000000">6</font><font color="#000000">;</font>
+            <pre><code class="language-python">
+                // Variabele voor de motoren aan te sturen
+                const int stby = 9;
+                const int ain1 = 2;
+                const int ain2 = 4;
+                const int bin1 = 7;
+                const int bin2 = 8;
+                const int pwma = 5;
+                const int pwmb = 6;
                 
-                <font color="#434f54">&#47;&#47; Variabele joystick</font>
-                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">vry</font> <font color="#434f54">=</font> <font color="#000000">A0</font><font color="#000000">;</font>
-                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">vrx</font> <font color="#434f54">=</font> <font color="#000000">A1</font><font color="#000000">;</font>
-                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">sw</font> <font color="#434f54">=</font> <font color="#000000">12</font><font color="#000000">;</font>
+                // Variabele joystick
+                const int vry = A0;
+                const int vrx = A1;
+                const int sw = 12;
                 
-                <font color="#00979c">int</font> <font color="#000000">x</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
-                <font color="#00979c">int</font> <font color="#000000">mapx</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
-                <font color="#00979c">int</font> <font color="#000000">y</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
-                <font color="#00979c">int</font> <font color="#000000">mapy</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
-                <font color="#00979c">int</font> <font color="#000000">sw_status</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+                int x = 0;
+                int mapx = 0;
+                int y = 0;
+                int mapy = 0;
+                int sw_status = 0;
                 
-                <font color="#434f54">&#47;&#47; Variavele voor Ultrasone</font>
-                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">trigPin</font> <font color="#434f54">=</font> <font color="#000000">10</font><font color="#000000">;</font>
-                <font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">echoPin</font> <font color="#434f54">=</font> <font color="#000000">11</font><font color="#000000">;</font>
+                // Variavele voor Ultrasone
+                const int trigPin = 10;
+                const int echoPin = 11;
                 
-                <font color="#00979c">float</font> <font color="#000000">tijdUltrasone</font><font color="#000000">;</font>
-                <font color="#00979c">float</font> <font color="#000000">afstandUltrasone</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+                float tijdUltrasone;
+                float afstandUltrasone = 0;
                 
-                <font color="#00979c">int</font> <font color="#000000">State</font> <font color="#434f54">=</font> <font color="#00979c">LOW</font><font color="#000000">;</font>
-                <font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">previousMillis</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
-                <font color="#00979c">const</font> <font color="#00979c">long</font> <font color="#000000">interval</font> <font color="#434f54">=</font> <font color="#000000">1000</font><font color="#000000">;</font>
+                int State = LOW;
+                unsigned long previousMillis = 0;
+                const long interval = 1000;
                 
-                <font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+                void setup() {
                 
-                 &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">9600</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; motoren</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">stby</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+                    Serial.begin(9600);
+                    // motoren
+                    digitalWrite(stby, HIGH);
                 
-                 &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; Joystick</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">vrx</font><font color="#434f54">,</font> <font color="#00979c">INPUT</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">vry</font><font color="#434f54">,</font> <font color="#00979c">INPUT</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">sw</font><font color="#434f54">,</font> <font color="#00979c">INPUT_PULLUP</font><font color="#000000">)</font><font color="#000000">;</font>
+                    // Joystick
+                    pinMode(vrx, INPUT);
+                    pinMode(vry, INPUT);
+                    pinMode(sw, INPUT_PULLUP);
                 
-                 &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; Joystick zekerheid</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain2</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin2</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+                    // Joystick zekerheid
+                    digitalWrite(ain1, LOW);
+                    digitalWrite(ain2, LOW);
+                    digitalWrite(bin1, LOW);
+                    digitalWrite(bin2, LOW);
                 
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">x</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">mapx</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">y</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">mapy</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">sw_status</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+                    x = 0;
+                    mapx = 0;
+                    y = 0;
+                    mapy = 0;
+                    sw_status = 0;
                 
-                 &nbsp;&nbsp;&nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">trigPin</font><font color="#434f54">,</font> <font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">echoPin</font><font color="#434f54">,</font> <font color="#00979c">INPUT</font><font color="#000000">)</font><font color="#000000">;</font>
-                <font color="#000000">}</font>
+                    pinMode(trigPin, OUTPUT);
+                    pinMode(echoPin, INPUT);
+                }
                 
-                <font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+                void loop() {
                 
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">x</font> <font color="#434f54">=</font> <font color="#d35400">analogRead</font><font color="#000000">(</font><font color="#000000">vrx</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">y</font> <font color="#434f54">=</font> <font color="#d35400">analogRead</font><font color="#000000">(</font><font color="#000000">vry</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">sw_status</font> <font color="#434f54">=</font> <font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">sw</font><font color="#000000">)</font><font color="#000000">;</font>
+                    x = analogRead(vrx);
+                    y = analogRead(vry);
+                    sw_status = digitalRead(sw);
                 
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">mapx</font> <font color="#434f54">=</font> <font color="#d35400">map</font><font color="#000000">(</font><font color="#000000">x</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#434f54">,</font> <font color="#000000">1018</font><font color="#434f54">,</font> <font color="#434f54">-</font><font color="#000000">512</font><font color="#434f54">,</font> <font color="#000000">512</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">mapy</font> <font color="#434f54">=</font> <font color="#d35400">map</font><font color="#000000">(</font><font color="#000000">y</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#434f54">,</font> <font color="#000000">1018</font><font color="#434f54">,</font> <font color="#434f54">-</font><font color="#000000">512</font><font color="#434f54">,</font> <font color="#000000">512</font><font color="#000000">)</font><font color="#000000">;</font>
+                    mapx = map(x, 0, 1018, -512, 512);
+                    mapy = map(y, 0, 1018, -512, 512);
                 
-                 &nbsp;&nbsp;&nbsp;<font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">currentMillis</font> <font color="#434f54">=</font> <font color="#d35400">millis</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">currentMillis</font> <font color="#434f54">-</font> <font color="#000000">previousMillis</font> <font color="#434f54">&gt;=</font> <font color="#000000">interval</font><font color="#000000">)</font> <font color="#000000">{</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">previousMillis</font> <font color="#434f54">=</font> <font color="#000000">currentMillis</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">ultrasone</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+                    if (mapx > 500) {
+                        digitalWrite(ain1, HIGH);
+                        digitalWrite(bin1, HIGH);
+                        analogWrite(pwma, 200);
+                        analogWrite(pwmb, 200);
+                        delay(5);
+                        digitalWrite(ain1, LOW);
+                        digitalWrite(bin1, LOW);
+                        analogWrite(pwma, 0);
+                        analogWrite(pwmb, 0);
+                    }
                 
-                 &nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">mapx</font> <font color="#434f54">&gt;</font> <font color="#000000">500</font><font color="#000000">)</font> <font color="#000000">{</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">200</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwmb</font><font color="#434f54">,</font> <font color="#000000">200</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">5</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwmb</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+                    if (mapx < -500) {
+                        digitalWrite(ain2, HIGH);
+                        digitalWrite(bin2, HIGH);
+                        analogWrite(pwma, 200);
+                        analogWrite(pwmb, 200);
+                        delay(5);
+                        digitalWrite(ain2, LOW);
+                        digitalWrite(bin2, LOW);
+                        analogWrite(pwma, 0);
+                        analogWrite(pwmb, 0);
+                    }
                 
-                 &nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">mapx</font> <font color="#434f54">&lt;</font> <font color="#434f54">-</font><font color="#000000">500</font><font color="#000000">)</font> <font color="#000000">{</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain2</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin2</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">200</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwmb</font><font color="#434f54">,</font> <font color="#000000">200</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">5</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain2</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin2</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwmb</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+                    if (mapy > 500) {
+                        digitalWrite(bin1, HIGH);
+                        analogWrite(pwmb, 200);
+                        delay(5);
+                        digitalWrite(bin1, LOW);
+                        analogWrite(pwmb, 0);
+                    }
                 
-                 &nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">mapy</font> <font color="#434f54">&gt;</font> <font color="#000000">500</font><font color="#000000">)</font> <font color="#000000">{</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwmb</font><font color="#434f54">,</font> <font color="#000000">200</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">5</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">bin1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwmb</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
-                
-                 &nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">mapy</font> <font color="#434f54">&lt;</font> <font color="#434f54">-</font><font color="#000000">500</font><font color="#000000">)</font> <font color="#000000">{</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">200</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">5</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
-                <font color="#000000">}</font>
-                
-                <font color="#00979c">void</font> <font color="#000000">ultrasone</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">{</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; Ultrasone check</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">trigPin</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#d35400">delayMicroseconds</font><font color="#000000">(</font><font color="#000000">10</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">trigPin</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
-                
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">tijdUltrasone</font> <font color="#434f54">=</font> <font color="#d35400">pulseIn</font><font color="#000000">(</font><font color="#000000">echoPin</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">afstandUltrasone</font> <font color="#434f54">=</font> <font color="#000000">tijdUltrasone</font> <font color="#434f54">&#47;</font> <font color="#000000">148.0</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">20</font><font color="#000000">)</font><font color="#000000">;</font>
-                
-                 &nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">afstandUltrasone</font> <font color="#434f54">&lt;</font> <font color="#000000">15.0</font><font color="#000000">)</font> <font color="#000000">{</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">150</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">1500</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">ain1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwma</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
-                 &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
-                <font color="#000000">}</font>
-                
-                </pre>
+                    if (mapy < -500) {
+                        digitalWrite(ain1, HIGH);
+                        analogWrite(pwma, 200);
+                        delay(5);
+                        digitalWrite(ain1, LOW);
+                        analogWrite(pwma, 0);
+                    }
+                }</code></pre>
         </main>
 
         <footer>
