@@ -48,20 +48,8 @@
                 int mapy = 0;
                 int sw_status = 0;
                 
-                // Variavele voor Ultrasone
-                const int trigPin = 10;
-                const int echoPin = 11;
-                
-                float tijdUltrasone;
-                float afstandUltrasone = 0;
-                
-                int State = LOW;
-                unsigned long previousMillis = 0;
-                const long interval = 1000;
-                
                 void setup() {
                 
-                    Serial.begin(9600);
                     // motoren
                     digitalWrite(stby, HIGH);
                 
@@ -70,28 +58,28 @@
                     pinMode(vry, INPUT);
                     pinMode(sw, INPUT_PULLUP);
                 
-                    // Joystick zekerheid
+                    // Motor driver zekerheid
                     digitalWrite(ain1, LOW);
                     digitalWrite(ain2, LOW);
                     digitalWrite(bin1, LOW);
                     digitalWrite(bin2, LOW);
                 
+                    // Joystick zekerheid
                     x = 0;
                     mapx = 0;
                     y = 0;
                     mapy = 0;
                     sw_status = 0;
-                
-                    pinMode(trigPin, OUTPUT);
-                    pinMode(echoPin, INPUT);
                 }
                 
                 void loop() {
                 
+                    // Waarde x, y as lezen
                     x = analogRead(vrx);
                     y = analogRead(vry);
                     sw_status = digitalRead(sw);
                 
+                    // Mappen naar gemakkelijkere waarden
                     mapx = map(x, 0, 1018, -512, 512);
                     mapy = map(y, 0, 1018, -512, 512);
                 
